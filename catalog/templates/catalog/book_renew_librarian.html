@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h3>Renew: {{bookinst.book.title}}</h3>
+    <p>Borrower: {{bookinst.borrower}}</p>
+    <p {% if bookinst.is_overdue %} class="red-text" {% endif %}>Due date: {{bookinst.due_back}}</p>
+    
+    <div class="row">
+        <form action="" method="post" class="col s12">
+            {% csrf_token %}
+            <p>{{form.renewal_date.errors}}</p>
+            <div class="row">     
+                <div class="col s6">
+                    <label style="color:black;font-size:15px;">Renewal Date</label>
+                    {{form.renewal_date}}
+                    <span class="helptext">{{form.renewal_date.help_text}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-light btn-large light-blue darken-4" type="submit" ><i class="mdi mdi-send blue-text"></i>Submit</button>
+            </div>  
+        </form>
+    </div>
+
+{% endblock %}
+

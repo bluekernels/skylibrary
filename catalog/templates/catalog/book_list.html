@@ -1,0 +1,67 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+    {% if book_list %} <!-- If there are books in the library-->
+
+        {% if user.is_staff %}
+            {% if perms.catalog.can_mark_returned %}
+            <a href="{% url 'book_create' %}" class="btn waves-effect waves-light btn-large light-blue darken-4" ><i class="mdi mdi-plus-circle"></i>New</a>
+                <ul class="collection with-header">
+                    <li class="collection-header"><h3>Book List</h3></li>
+                    {% for book in book_list %}
+                    <li class="collection-item">
+                        <a href="{{ book.get_absolute_url }}">{{ book }}</a> &NonBreakingSpace;-&NonBreakingSpace; {{book.author}}
+                            <a href="{% url 'book_delete' book.pk %}" class="secondary-content"><i class="mdi mdi-delete blue-text"></i></a>
+                            <a href="{% url 'book_update' book.pk %}" class="secondary-content"><i class="mdi mdi-table-edit blue-text"></i></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+        {% else %}
+        <ul class="collection with-header">
+                <li class="collection-header"><h3>Book List</h3></li>
+                {% for book in book_list %}
+                <li class="collection-item">
+                    <a href="{{ book.get_absolute_url }}">{{ book }}</a> &NonBreakingSpace;-&NonBreakingSpace; {{book.author}}
+                </li> 
+                {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="center-align" >
+            {% if is_paginated %}
+                <ul class="pagination">
+                    
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}"><i class="mdi mdi-chevron-left"></i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#!"><i class="mdi mdi-chevron-left"></i></a></li>
+                    {% endif %}
+
+                    {% for i in paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="active light-blue darken-4"><a href="#!">{{ i }}</a></li>
+                        {% else %}
+                            <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="mdi mdi-chevron-right"></i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#!"><i class="mdi mdi-chevron-right"></i></a></li>
+                    {% endif %}
+
+                </ul>
+                {% endif %}
+
+            </div>
+       
+
+    {% else %}
+        <p>There are no books in the library.</p>
+    {% endif %}
+
+{% endblock %}

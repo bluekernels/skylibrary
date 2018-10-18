@@ -1,0 +1,49 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+    home | skylibrary
+{% endblock %}
+
+{% block content %}
+
+<h2 class="right_pane">Sky Library Home</h2>
+<p>Welcome to SkyLibrary, an online library repository where users can check details and also borrow</p>
+
+<h4>Dynamic content</h4>
+<p>The library contain the following record counts:</p>
+<table class="responsive-table borderless ">
+    <thead>
+        <tr>
+            <th>Content</th>
+            <th>Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Books</td>
+            <td>{{ num_books }}</td>
+        </tr>
+        <tr>
+            <td>Copies</td>
+            <td>{{ num_instances }}</td>
+        </tr>
+        <tr>
+            <td>Copies Available</td>
+            <td>{{ num_instances_available }}</td>
+        </tr>
+        <tr>
+            <td>Copies On Loan</td>
+            <td>{{ num_instances_on_loan }}</td>
+        </tr>
+        <tr>
+            <td>Copies On Maintenance</td>
+            <td>{{ num_instances_on_maintenance }}</td>
+        </tr>
+        <tr>
+            <td>Authors</td>
+            <td>{{ num_authors }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

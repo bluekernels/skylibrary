@@ -1,0 +1,70 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% if author_list %}
+
+        {% if user.is_staff %}
+            {% if perms.catalog.can_mark_returned %}
+            <a href="{% url 'author_create' %}" class="btn waves-effect waves-light btn-large light-blue darken-4" ><i class="mdi mdi-plus-circle"></i>New</a>
+            <ul class="collection with-header">
+                   
+                <li class="collection-header"><h3>Author List </h3></li>
+                {% for author in author_list %}
+                <li class="collection-item">
+                    <a href="{{ author.get_absolute_url }}">
+                        {{ author }} ({{author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif %})
+                        </a>
+                        <a href="{% url 'author_delete' author.pk %}" class="secondary-content"><i class="mdi mdi-delete blue-text"></i></a>
+                        <a href="{% url 'author_update' author.pk %}" class="secondary-content"><i class="mdi mdi-table-edit blue-text"></i></a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
+        {% else %}
+            <ul class="collection with-header">
+                <li class="collection-header"><h3>Author List</h3></li>
+                {% for author in author_list %}
+                <li class="collection-item">
+                    <a href="{{ author.get_absolute_url }}">
+                        {{ author }} ({{author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif %})
+                        </a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        
+
+        <div class="center-align" >
+            {% if is_paginated %}
+                <ul class="pagination">
+                    
+                    {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}"><i class="mdi mdi-chevron-left"></i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#!"><i class="mdi mdi-chevron-left"></i></a></li>
+                    {% endif %}
+
+                    {% for i in paginator.page_range %}
+                        {% if page_obj.number == i %}
+                            <li class="active light-blue darken-4"><a href="#!">{{ i }}</a></li>
+                        {% else %}
+                            <li class="waves-effect"><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li class="waves-effect"><a href="?page={{ page_obj.next_page_number }}"><i class="mdi mdi-chevron-right"></i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#!"><i class="mdi mdi-chevron-right"></i></a></li>
+                    {% endif %}
+
+                </ul>
+            {% endif %}
+
+            </div>
+    {% else %}
+        <p><strong>There are no authors in the library</strong></p>
+    {% endif %}
+{% endblock %}

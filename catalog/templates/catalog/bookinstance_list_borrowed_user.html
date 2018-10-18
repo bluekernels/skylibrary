@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    {% if bookinstance_list %}
+		<ul class="collection with-header">
+			<li class="collection-header"><h3>Borrowed Books</h3></li>
+			{% for bookinst in bookinstance_list %} 
+				<li class="{% if bookinst.is_overdue %} red-text {% endif %} collection-item">
+				<a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})        
+				</li>
+			{% endfor %}
+		</ul>
+    {% else %}
+    	<p>There are no books borrowed.</p>
+	{% endif %}   
+	    
+{% endblock %}
+
