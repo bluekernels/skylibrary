@@ -103,6 +103,7 @@ pyparsing==2.2.0
 pyperclip==1.6.0
 pyqtgraph==0.10.0
 pyserial==3.4
+PySimpleSOAP==1.16.2
 pysmbc==1.0.15.6
 PySocks==1.6.5
 python-apt==1.6.0
@@ -130,6 +131,7 @@ SecretStorage==2.3.1
 service-identity==17.0.0
 setproctitle==1.1.10
 simplejson==3.15.0
+singledispatch==3.4.0.3
 six==1.11.0
 smoke-zephyr==1.2.0
 sortedcontainers==1.5.9
@@ -140,6 +142,7 @@ termcolor==1.1.0
 termineter==1.0.4
 tornado==5.0.2
 Twisted==18.9.0
+typing==3.6.6
 tzlocal==1.5.1
 unattended-upgrades==0.1
 urllib3==1.22
