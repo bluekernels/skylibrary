@@ -1,5 +1,5 @@
 AdvancedHTTPServer==2.0.11
-alembic==0.9.7.dev0
+alembic==0.9.7
 apparmor==2.12
 asn1crypto==0.24.0
 attrs==18.2.0
